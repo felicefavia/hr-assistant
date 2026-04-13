@@ -1,0 +1,37 @@
+Nome: Luca Bianchi
+Email: luca.bianchi@email.com
+Telefono: +39 345 9876543
+Località: Torino, Italia
+
+PROFILO
+Software Developer Manager con oltre 10 anni di esperienza nello sviluppo software e nella gestione di team tecnici.
+
+ESPERIENZA LAVORATIVA
+Software Development Manager
+Tech Solutions Spa - Torino
+2018 - Presente
+- Gestione team di 10 sviluppatori
+- Pianificazione progetti software
+- Supervisione architetture backend e frontend
+
+Senior Software Developer
+DevCompany - Torino
+2014 - 2018
+- Sviluppo applicazioni web in Python e JavaScript
+- Implementazione API REST
+- Ottimizzazione performance
+
+FORMAZIONE
+Laurea in Informatica
+Politecnico di Torino
+
+COMPETENZE
+- Python, JavaScript, Java
+- Architetture microservizi
+- Agile / Scrum
+- Cloud (AWS, Azure)
+- Database SQL e NoSQL
+
+LINGUE
+Italiano: Madrelingua
+Inglese: Avanzato

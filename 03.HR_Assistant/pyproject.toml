@@ -1,0 +1,23 @@
+[project]
+name = "00-hr-assistant"
+version = "0.1.0"
+description = "HR Assistant con RAG e Vector DB"
+authors = [
+    { name = "Felice Favia", email = "felicefavia56@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.10,<4.0.0"
+dependencies = [
+    "chainlit>=2.10.1",
+    "chromadb",
+    "openai",
+    "python-dotenv",
+    "ollama (>=0.6.1,<0.7.0)"
+]
+
+[tool.poetry]
+packages = [{ include = "00", from = "src" }]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
