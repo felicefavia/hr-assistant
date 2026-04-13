@@ -66,3 +66,20 @@ class Database:
         result = self.collection.get(where={"source": source})
         if result and result["ids"]:
             self.collection.delete(ids=result["ids"])
+
+    def get_stats(self):
+        data = self.collection.get()
+        metadatas = data.get("metadatas", [])
+
+        # numero totale chunk (frammenti)
+        total_chunks = len(data.get("ids", []))
+
+        # numero documenti unici (CV)
+        sources = [m["source"] for m in metadatas if m and "source" in m]
+        unique_docs = len(set(sources))
+
+        return f"""
+        Collezione: {self.collection.name}
+        Numero totale frammenti: {total_chunks}
+        Numero documenti (CV) processati correttamente: {unique_docs}
+        """

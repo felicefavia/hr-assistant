@@ -15,6 +15,22 @@ db = Database()
 added, updated, removed = DocumentProcessor.process_documents(db)
 print(f"Document sync complete: {added} added, {updated} updated, {removed} removed")
 
+@cl.action_callback("db_stats")
+async def on_action(action: cl.Action):
+    db_info = db.get_stats()
+    response = await LLMHelmper.get_db_stats(db_info)
+    await cl.Message(response).send()
+
+@cl.action_callback("db_reindex")
+async def on_action(action: cl.Action):
+    added, updated, removed = DocumentProcessor.process_documents(db)
+    message = f"DB reindicizzato con successo. Document sync complete: {added} added, {updated} updated, {removed} removed."
+    await cl.Message(message).send()
+
+
+@cl.action_callback("helloword")
+async def on_action(action: cl.Action):
+    await cl.Message("Holaaa").send()
 
 # Funzione che viene chiamata all'inizio della chat per inizializzare la sessione dell'utente
 @cl.on_chat_start
@@ -23,6 +39,31 @@ async def start():
     Inizializza la sessione utente con un messaggio del sistema.
     Questo messaggio definisce il ruolo del chatbot
     """
+
+    actions = [
+        cl.Action(
+            name="db_stats",
+            icon="mouse-pointer-click",
+            payload={"value": "db_stats"},
+            label="Statistiche Database"
+        ),
+        cl.Action(
+            name="db_reindex",
+            icon="mouse-pointer-click",
+            payload={"value": "db_reindex"},
+            label="Reindex Database"
+        ),
+        cl.Action(
+            name="helloword",
+            icon="mouse-pointer-click",
+            payload={"value": "helloword"},
+            label="Hello World!"
+        )
+    ]
+
+    await cl.Message(content="Informazioni del sistema", actions=actions).send()
+
+
     cl.user_session.set(
         "messages",
         [

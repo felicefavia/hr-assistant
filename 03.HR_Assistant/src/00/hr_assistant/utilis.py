@@ -64,3 +64,26 @@ class LLMHelmper:
         Argomenta la scelta utilizzando il contenuto del testo individuato nel contesto.
         Se non trovi corrispondenza in nessun CV, non inventare nulla.
         """
+    
+    @staticmethod
+    async def get_db_stats(context):
+
+        client = OpenAI(
+            base_url=os.getenv("AI_API_URL"), 
+            api_key=os.getenv("AI_API_KEY")
+        )
+
+        response = client.chat.completions.create(
+            model=os.getenv("LLM_MODEL"),
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"""
+                       Il tuo compito è quello di descrivere in modo testuale, ma sintentico le statistiche
+                       legate al databse dei framment indicizzati da questo sistema.
+                       Ecco le informazioni necessarie {context}
+                    """
+                }
+            ]
+        )
+        return response.choices[0].message.content
