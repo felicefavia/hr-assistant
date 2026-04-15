@@ -102,5 +102,6 @@ class DocumentProcessor:
     
     @staticmethod
     def read_first_linest(file_path, n_lines):
+        print("---------------------------- file_path ----------------------------: " + str(file_path))
         with open(file_path, "r") as file:
             return [line.strip() for line, _ in zip(file, range(n_lines))]
