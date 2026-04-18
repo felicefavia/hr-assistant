@@ -2,6 +2,7 @@ import os
 import uuid
 import hashlib
 from semantic_chunking import SemanticChunking
+from pathlib import Path
 
 class DocumentProcessor: 
 
@@ -28,13 +29,10 @@ class DocumentProcessor:
         metadatas = []
         ids = []
 
-        print("sono qui 2: ")
-        print(file_path)
-
         with open(file_path, "r") as file:
             txt = file.read()
-            sc = SemanticChunking(breakpoint_percentile=70, buffer_size=1)
-            chunks = sc.chunck_text(txt)
+            sc = SemanticChunking()
+            chunks = sc.chunk_text(txt)
             file_metadata = DocumentProcessor.get_document_metadata(file_path)
 
             for chunck in chunks:
@@ -49,9 +47,8 @@ class DocumentProcessor:
     @staticmethod
     def process_documents(db):
 
-        documents_dir = os.path.join("../../", os.getenv("DOCUMENTS_DIR", "resumes"))
-
-        print("sono qui:", documents_dir)
+        BASE_DIR = Path(__file__).resolve().parents[3]
+        documents_dir = BASE_DIR / os.getenv("DOCUMENTS_DIR", "resumes")
 
         current_files = {
             f: DocumentProcessor.get_document_metadata(
@@ -61,7 +58,6 @@ class DocumentProcessor:
             if f.endswith(".txt")
         }
 
-        print("Current files in directory:", current_files)
 
         # PRENDE I FILE ESISTENTI
         existing_files = db.get_tracked_files()

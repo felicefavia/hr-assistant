@@ -94,9 +94,6 @@ async def handle_message(message: cl.Message):
     filename = results["metadatas"][0][0]['source']
     file_path = DOCUMENTS_DIR / filename
 
-    print("----------------------ecccomi----------------------")
-    print(str(file_path))
-
     # Leggi le prime 10 linee del file in UTF-8
     context_lines = DocumentProcessor.read_first_linest(file_path, 10)
 

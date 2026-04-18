@@ -7,7 +7,7 @@ import os
 class SemanticChunking:
 
     def __init__(self, breakpoint_percentile=95, buffer_size=1):
-        self.embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("AI_API_KEY"))
+        self.embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("AI_API_KEY"),  model="text-embedding-3-small")
         self.breakpoint_percentile = breakpoint_percentile
         self.buffer_size = buffer_size
 
